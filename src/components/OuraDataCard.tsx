@@ -133,7 +133,7 @@ export function OuraDataCard(
   );
 
   return (
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} md={4} lg={3} xl={2}>
       <Card className={classes.card} style={{ backgroundColor: bgcolor }}>
         <Typography variant="subtitle2" className={classes.titleText}>
           {" "}

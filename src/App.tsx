@@ -15,7 +15,7 @@ const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
-    padding:theme.spacing(4),
+    padding:theme.spacing(3),
     overflow: "auto"
   },
   titleImageDiv: {
@@ -105,7 +105,7 @@ const App: React.FC = () => {
         <img alt="" className={classes.titleImage} src="./URO_logo.svg" />
       </div>
 
-      <Grid container spacing={1} >
+      <Grid container spacing={1} justify="center" >
         {OuraDataCard("URO-KLAR", "#C19825", uromakers,"readiness")}
         {OuraDataCard("URO-PULS", "#9f0736", uromakers,"activity")}
         {OuraDataCard("URO-SNORK", "#535C6E", uromakers,"sleep")}
