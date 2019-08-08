@@ -7,7 +7,7 @@ import { OuraDataCard } from "./components/OuraDataCard";
 import { Uromaker, SleepData, ActivityData, ReadinessData } from "./Models";
 import Grid from "@material-ui/core/Grid";
 
-type classNames = "root" | "titleImage";
+type classNames = "root" | "titleImageDiv" | "titleImage";
 const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
   root: {
     background: theme.palette.background.default,
@@ -18,10 +18,17 @@ const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
     padding:theme.spacing(4),
     overflow: "auto"
   },
-  titleImage: {
-    width: "200px",
-    class: "center"
+  titleImageDiv: {
+    width: "100wv",
+    display:"flex",
+    margin:theme.spacing(),
+    justifyContent:'center'
+  },
+  titleImage:{
+    width:"150px"
   }
+  
+
 }));
 
 const App: React.FC = () => {
@@ -94,14 +101,14 @@ const App: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.titleImage}>
-        <img alt="" className={classes.titleImage} src="./title.png" />
+      <div className={classes.titleImageDiv}>
+        <img alt="" className={classes.titleImage} src="./URO_logo.svg" />
       </div>
 
       <Grid container spacing={1} >
-        {OuraDataCard("URO-KLAR", "rgba(252,199,49,0.6)", uromakers,"readiness")}
-        {OuraDataCard("URO-PULS", "rgba(160,0,52,0.9)", uromakers,"activity")}
-        {OuraDataCard("URO-SNORK", "rgba(255,255,255,0.3)", uromakers,"sleep")}
+        {OuraDataCard("URO-KLAR", "#C19825", uromakers,"readiness")}
+        {OuraDataCard("URO-PULS", "#9f0736", uromakers,"activity")}
+        {OuraDataCard("URO-SNORK", "#535C6E", uromakers,"sleep")}
       </Grid>
     </div>
   );
