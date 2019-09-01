@@ -15,8 +15,9 @@ export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
   const DaysInWeek = 5
 
   let reqAvg = 0
+
   if (uromakers !== undefined && uromakers[0] !== undefined) {
-    reqAvg = Goal * DaysInWeek - (totalAvg * uromakers[0].readiness_Score.length / DaysInWeek - uromakers[0].readiness_Score.length)
+    Math.round(reqAvg = (Goal * DaysInWeek - (totalAvg * uromakers[0].readiness_Score.length)) / (DaysInWeek - uromakers[0].readiness_Score.length))
   }
 
   const DailyValueAndAvg = ({ urom, index }: { urom: Uromaker2, index: number }) => {
