@@ -75,8 +75,8 @@ export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
         </div>
         <div>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <h3>{totalAvg}</h3>
-            <h4> /85</h4>
+            <h1 >{totalAvg}</h1>
+            <h1> /85</h1>
           </div>
           <h2> Req:{reqAvg}</h2>
         </div>

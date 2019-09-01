@@ -34,7 +34,7 @@ export default function SimpleMenu() {
                 <MenuItem onClick={() => window.location.href = redirecturl + './jacob.png'}>Jacob</MenuItem>
                 <MenuItem onClick={() => window.location.href = redirecturl + './christer.png'}>Christer</MenuItem>
                 <MenuItem onClick={() => window.location.href = redirecturl + './agnes.png'}>Agnes</MenuItem>
-                <MenuItem onClick={() => window.location.href = redirecturl + './Andreas.png'}>Andreas</MenuItem>
+                <MenuItem onClick={() => window.location.href = redirecturl + './andreas.png'}>Andreas</MenuItem>
             </Menu>
         </div>
     );
