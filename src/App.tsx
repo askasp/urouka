@@ -40,7 +40,6 @@ const App: React.FC = () => {
     getTokenSilently,
     user,
     loginWithRedirect,
-    logout
   } = useAuth0();
 
   const [uromakers2, setUromakers2] = useState([
@@ -107,12 +106,11 @@ const App: React.FC = () => {
     async function getUromakers() {
       const tmp = await GetAuth0UserData(token, user.sub);
       if (haveFetched === false) {
-        if (tmp["user_metadata"] == undefined) {
-          const a = await UpdateUserData(uromakers2, token, user.sub);
+        if (tmp["user_metadata"] === undefined) {
+          await UpdateUserData(uromakers2, token, user.sub);
           setHaveFetched(true)
         }
         else {
-          console.log("hei")
           await fetchAndUpdateUromakers(tmp["user_metadata"]["uromakers2"])
           setHaveFetched(true)
         }

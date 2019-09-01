@@ -59,8 +59,6 @@ border-right:0px solid rgba(255,255,255,0.15);
 
 }
 
-
-
 .uroCardTop{
     background-color: #535c6E;
     padding:8px;
@@ -68,6 +66,29 @@ border-right:0px solid rgba(255,255,255,0.15);
     margin-bottom: 0px;
     border-radius: 8px 8px 0 0
 }
+.uroCardTop h1,
+.uroCardTop h2,
+.uroCardBottom h1,
+.uroCardBottom h2{
+font-family: Roboto;
+font-weight: 400;
+font-size: 14px;
+color: #ffffff;
+text-align: center
+}
+
+.uroCardBottom h2,
+.uroCardTop h2{
+width:17vw;
+border-right:1px solid rgba(255,255,255,0.15);
+font-size: 20px;
+}
+
+.uroCardBottom h2{
+    font-weight: 700;
+
+}
+
 .uroCardBottom{
     background-color: #374053;
     padding:8px;
@@ -89,39 +110,49 @@ border-right:0px solid rgba(255,255,255,0.15);
     justify-content: space-between;
     margin-bottom: 16px;
   }
+  
 
-.top-card-title{
+.top-card h1,
+.top-card h2{
     font-family: Roboto;
     font-weight: 700;
     margin:0px;
     font-size: 15px;
     color:white;
 }
-.top-card-subtitle{
+.top-card h2{
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.top-card h3,
+.top-card h4{
+    font-family: Roboto;
+    font-weight: 700;
+    margin:0px;
+    font-size: 24px;
+    color:white;
+
+}
+.top-card h4{
+    opacity:0.5;
+
+}
+.button{
+    background-color:#091630;
+    border:0px;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color:white
+}
+
+.button h5{
     font-family: Roboto;
     font-weight: 400;
     margin:0px;
     font-size: 13px;
     color:white;
-}
 
-.uro-maal{
-    font-family: Roboto;
-    font-weight: 700;
-    margin:0px;
-    font-size: 24px;
-    color:white;
-
-}
-.uro-currentavg{
-    font-family: Roboto;
-    font-weight: 700;
-    margin:0px;
-    font-size: 24px;
-    opacity:0.5;
-    color:white;
-
-}
-.Button{
-    background-color: black
 }

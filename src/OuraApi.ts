@@ -18,14 +18,14 @@ export async function GetUserData(token: string) {
 const getToday = () => {
     const today = new Date();
     var friday
-    if (today.getDay() == 0) {
+    if (today.getDay() === 0) {
         friday = new Date().setDate(today.getDate() - 2);
         friday = new Date(friday)
         friday = friday.getFullYear() + '-' + (friday.getMonth() + 1) + '-' + friday.getDate();
         console.log("sunday friday is is", friday)
         return friday
     }
-    if (today.getDay() == 6) {
+    if (today.getDay() === 6) {
         friday = new Date().setDate(today.getDate() - 2);
         friday = new Date(friday)
         friday = friday.getFullYear() + '-' + (friday.getMonth() + 1) + '-' + friday.getDate();
@@ -44,7 +44,7 @@ function getPreviousMonday() {
     }
     var prevMonday;
     console.log("day is", date.getDay())
-    if (date.getDay() == 1) {
+    if (date.getDay() === 1) {
         return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     }
     else {
@@ -68,7 +68,7 @@ export async function GetOuraData(token: string, dataType: string) {
         }
     );
     const b = await response.json()
-    if (b['readiness'] != undefined && b['readiness'].length > 0) {
+    if (b['readiness'] !== undefined && b['readiness'].length > 0) {
         const c = b['readiness'].map((item: any) => item.score)
         console.log("C is ", c)
         return c

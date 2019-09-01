@@ -1,13 +1,10 @@
 import React from 'react';
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import AddIcon from '@material-ui/icons/Add';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import MenuItem from '@material-ui/core/MenuItem';
 
-const redirecturl = "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=IFO2B5ELXS5YA6B3&redirect_uri=" + window.location.origin + "&state="
+const redirecturl = "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=IFO2B5ELXS5YA6B3&redirect_uri=" + encodeURI(window.location.origin) + "&state="
 
 export default function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -21,11 +18,11 @@ export default function SimpleMenu() {
     }
 
     return (
-        <div style={{}}>
-            <button style={{ backgroundColor: "#091630", border: "0px", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }} onClick={handleClick}
+        <div>
+            <button className="button" onClick={handleClick}
             >
                 <ExpandMoreIcon color="secondary" />
-                <p className="top-card-subtitle" > Connect with Oura Account</p>
+                <h5 > Connect with Oura Account</h5>
             </button>
             <Menu
                 id="simple-menu"
