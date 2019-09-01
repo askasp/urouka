@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import MenuItem from '@material-ui/core/MenuItem';
 
-const redirecturl = "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=VLIHHNEVF4PZ2ADJ&redirect_uri=" + window.location.origin + "&state="
+const redirecturl = "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=IFO2B5ELXS5YA6B3&redirect_uri=" + window.location.origin + "&state="
 
 export default function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -21,8 +21,8 @@ export default function SimpleMenu() {
     }
 
     return (
-        <div style={{}}> >
-            <button style={{ backgroundColor: "#091630", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }} onClick={handleClick}
+        <div style={{}}>
+            <button style={{ backgroundColor: "#091630", border: "0px", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }} onClick={handleClick}
             >
                 <ExpandMoreIcon color="secondary" />
                 <p className="top-card-subtitle" > Connect with Oura Account</p>
