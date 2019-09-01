@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import MenuItem from '@material-ui/core/MenuItem';
 
-const redirecturl = "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=VLIHHNEVF4PZ2ADJ&redirect_uri=http://localhost:3000&state="
+const redirecturl = "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=VLIHHNEVF4PZ2ADJ&redirect_uri=" + window.location.origin + "&state="
 
 export default function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
