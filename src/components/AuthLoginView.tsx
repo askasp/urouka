@@ -1,31 +1,40 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { Uromaker } from "../Models";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-const loginBtn = {
-  margin: "0 auto",
-  height: '40px',
-  backgroundColor: "#091630",
-  color: "white",
-  top:"10px"
-};
+type classNames = "loginBtn" | "wrapper";
+const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
+  loginBtn: {
+    margin: "0 auto",
+    height: 50,
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+  },
+  wrapper: {
+    height: "100vh",
+    width: "100vw",
+    display: "flex",
+    alignItems: "center",
+  },
+}));
 
-export const AuthLoginView = (uromaker: Uromaker) => {
-  //const classes = useStyles();
+export const AuthLoginView = ({
+  loginWithRedirect,
+}: {
+  loginWithRedirect: () => void;
+}) => {
+  const classes = useStyles();
+
   return (
-    <div style={{height:"60px"}}>
-    <Button
-      color="primary"
-      style={loginBtn}
-      variant="contained"
-      onClick={() =>
-        (window.location.href =
-          "https://cloud.ouraring.com/oauth/authorize?response_type=token&client_id=VLIHHNEVF4PZ2ADJ&state=" +
-          uromaker.img)
-      }
-    >
-      Join{" "}
-    </Button>
+    <div className={classes.wrapper}>
+      <Button
+        color="primary"
+        variant="outlined"
+        className={classes.loginBtn}
+        onClick={() => loginWithRedirect()}
+      >
+        Sign in
+      </Button>
     </div>
   );
 };

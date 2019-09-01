@@ -1,22 +1,24 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import { Uromaker } from "../Models";
-import { AuthLoginView } from "./AuthLoginView";
+import { Uromaker2} from "../Models";
+import SimpleMenu from "./MenuView";
+
+const Days = ['M', 'T', 'O', 'T', 'F']
 
 type classNames =
   | "root"
-  | "card"
+  | "score"
+  | "mainCard"
+  | "topCard"
   | "titleText"
+  | "headerRow"
   | "profileImage"
   | "valueText"
-  | "labelText";
+  | "labelText"
+  | "titleStyle";
 const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
   root: {
-    padding: theme.spacing(2),
+    //    padding: theme.spacing(1),
     flexGrow: 1
   },
   valueText: {
@@ -24,123 +26,166 @@ const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
   },
   labelText: {
     color: "white",
-    fontSize:"12px"
+    fontSize: "12px"
   },
   titleText: {
     color: "white"
   },
   profileImage: {
-    width: "60px",
-    height: "60px",
+    width: "50px",
+    margin: "0px",
+    padding: "0px",
+    //height: "50px",
+    //    textAlign: "center",
     borderRadius: "50%"
   },
-  card: {
+  score: {
+    //color: theme.palette.text.secondary
+  },
+  headerRow: {
+    display: 'flex',
+    justifyContent: "space-between"
+  },
+  mainCard: {
+    backgroundColor: "#535C6e",
     borderRadius: theme.shape.borderRadius * 1,
     margin: theme.spacing(),
     padding: theme.spacing(),
-    maxWidth:"300px",
+
+    //padding: theme.spacing(),
+    //maxWidth:"600px",
     flexGrow: 1
+  },
+  topCard: {
+    backgroundColor: "#9F0736",
+    borderRadius: theme.shape.borderRadius * 1,
+    margin: theme.spacing(),
+    marginBottom: theme.spacing(2)
+    //paddding: theme.spacing(0),
+  },
+  titleStyle: {
+    fontFamily: "Roboto bold",
+    fontSize: "11px"
   }
+
 }));
 
-export function OuraDataCard(
-  title: string,
-  bgcolor: string,
-  uromakers: Uromaker[],
-  type:string
-) {
+export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
+  const classes = useStyles()
 
-  const classes = useStyles();
-  const dataRowView = (uromaker: Uromaker,type:string) => {
-    const loggedInView = () => {
-
-      let field1value = 0
-      let field2value= 0
-      let field3value= 0
-      let field1label = ""
-      let field2label= ""
-      let field3label= ""
-      if (type==="sleep"){
-        field1label="Dyp";
-        field1value = Math.round((uromaker.sleep[uromaker.sleep.length-1].deep*10)/3600)/10
-        field2label="Total";
-        field2value = Math.round((uromaker.sleep[uromaker.sleep.length-1].total*10)/3600)/10
-        field3label="Score";
-        field3value = uromaker.sleep[uromaker.sleep.length-1].score
-      }
-      if (type==="activity"){
-        field1label="Steps";
-        field1value = uromaker.activity[uromaker.activity.length-1].steps
-        field2label="kCal";
-        field2value = uromaker.activity[uromaker.activity.length-1].cal_total
-        field3label="Score";
-        field3value = uromaker.activity[uromaker.activity.length-1].score
-      }
-      if (type==="readiness"){
-        field1label="Activity Balance";
-        field1value = uromaker.readiness[uromaker.readiness.length-1].score_activity_balance
-        field2label="Sleep Balance";
-        field2value = uromaker.readiness[uromaker.readiness.length-1].score_sleep_balance
-        field3label="Score";
-        field3value = uromaker.readiness[uromaker.readiness.length-1].score
-      }
+  let individualavg = uromakers.map(uromaker =>
+    Math.round(uromaker.readiness_Score.reduce((previous, current) => current + previous, 0) / uromaker.readiness_Score.length))
 
 
+
+
+  const totalAvg = individualavg.reduce((previous, current) => current + previous, 0) / uromakers.length
+
+  const Goal = 85
+  const DaysInWeek = 5
+
+  let reqAvg = 0
+  if (uromakers !== undefined && uromakers[0] !== undefined) {
+    reqAvg = Goal * DaysInWeek - (totalAvg * uromakers[0].readiness_Score.length / DaysInWeek - uromakers[0].readiness_Score.length)
+  }
+
+  const DailyValueAndAvg = ({ urom, index }: { urom: Uromaker2, index: number }) => {
+    if (urom.readiness_Score === undefined) {
+      return (<></>)
+    }
+    let classes = "scoreText"
+    if (urom === uromakers[uromakers.length - 1]) {
+      classes = classes.concat(" noborder")
+    }
+
+    if (urom.readiness_Score[index] === undefined) {
       return (
-        <Grid container spacing={8}>
-          <Grid item xs={3}>
-            <img alt="" className={classes.profileImage} src={uromaker.img} />
-          </Grid>
-          {dataAndLabelView(
-            field1label,
-            field1value
-          )}
-          {dataAndLabelView(
-            field2label,
-            field2value
-          )}
-          {dataAndLabelView(
-            field3label,
-            field3value
-          )}
-        </Grid>
-      );
-    };
-    const notLoggedInView = () => {
-      return (
-        <Grid container spacing={8}>
-          <Grid item xs={3}>
-            <img alt="" className={classes.profileImage} src={uromaker.img} />
-          </Grid>
-          <Grid item xs={8}>
-            {AuthLoginView(uromaker)}
-          </Grid>
-        </Grid>
-      );
-    };
-    return uromaker.sleep.length > 0 && uromaker.activity.length>0 && uromaker.readiness.length>0 ? loggedInView() : notLoggedInView();
-  };
+        <div className="textContainer">
+          <p className={classes + " opacity50"}> 00 </p>
+        </div>
+      )
+    }
+    const sum = urom.readiness_Score.slice(0, index + 1).reduce((previous, current) => current + previous, 0)
+    const avg = sum / (index + 1)
+    return (
+      <div className="textContainer">
+        <p className={classes}> {urom.readiness_Score[index]} </p>
+      </div>
 
-  const dataAndLabelView = (label: string, value: number) => (
-    <Grid item xs={2}>
-      <Typography className={classes.valueText} variant="h6">
-        {value.toString()}
-      </Typography>
-      <Typography className={classes.labelText} variant="body2">
-        {label}
-      </Typography>
-    </Grid>
-  );
+    )
+
+  }
+
+  const Column = ({ uro }: { uro: Uromaker2 }) =>
+    <>
+
+      <div className="textContainer">
+        <img style={{ borderRadius: "50%", width: "50px", height: "50px" }} src={uro.img} />
+      </div>
+      {Days.map((day, index) =>
+        <DailyValueAndAvg urom={uro} index={index} />
+      )}
+    </>
+
+  const DayColumn = () =>
+    <>
+      <div className="textContainer">
+        <div style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+      </div>
+      {Days.map(day =>
+        <div className="textContainer">
+          <p className="dayText"> {day} </p>
+        </div>
+      )}
+    </>
+
 
   return (
-    <Grid item xs={12} md={4} lg={3} xl={2}>
-      <Card className={classes.card} style={{ backgroundColor: bgcolor }}>
-        <Typography variant="subtitle2" className={classes.titleText}>
-          {" "}
-          {title}{" "}
-        </Typography>
-        <CardContent>{uromakers.map(item => dataRowView(item,type))}</CardContent>
-      </Card>
-    </Grid>
-  );
+    <div style={{ flexGrow: 1 }}>
+
+      <div className="top-card">
+        <div>
+          <p className="top-card-title"> UKAS UROMÅL</p>
+          <p className="top-card-subtitle"> Readiness</p>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <p className="uro-currentavg"> {totalAvg}</p>
+          <p className="uro-maal"> /85</p>
+        </div>
+
+      </div>
+
+
+      <div className="uroCardTop">
+        <div id="container">
+          <div>
+            <DayColumn />
+          </div>
+          {uromakers.map((uromaker, index) => <div> <Column uro={uromaker} key={index} /> </div>)}
+        </div>
+      </div>
+
+      <div className="uroCardBottom">
+        <div id="container">
+          <div >
+            <div className="textContainer">
+              <p className="dayText"> </p>
+            </div>
+          </div>
+          {
+            individualavg.map((avg, index) => <div style={{}}>
+              <>
+                <div className="textContainer">
+                  {index + 1 === individualavg.length ?
+                    <p className="avgText noborder"> {avg} </p> : <p className="avgText"> {avg}</p>}
+                </div>
+              </>
+            </div>
+            )}
+        </div>
+      </div>
+      <SimpleMenu />
+    </div >
+  )
 }

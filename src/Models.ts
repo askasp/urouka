@@ -80,9 +80,15 @@ export interface ReadinessData {
 }
 
 export interface Uromaker {
-  img:string;
+  img: string;
   readiness: ReadinessData[];
   activity: ActivityData[];
   sleep: SleepData[];
+  token: string;
+}
+
+export interface Uromaker2 {
+  img: string;
+  readiness_Score: number[];
   token: string;
 }

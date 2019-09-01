@@ -5,7 +5,7 @@ const secondaryDark = "#938FA8";
 const theme = createMuiTheme({
   palette: {
     secondary: {
-      main: secondaryMain,
+      main: "#fff",
       contrastText: "#fff",
       dark: secondaryDark,
       light: "#C9C6D7",
@@ -20,8 +20,8 @@ const theme = createMuiTheme({
       default: "#091630",
     },
     text: {
-      primary: "#161225",
-      secondary: "#fff",
+      primary: "#000",
+      secondary: "#161225",
     },
     grey: {
       "100": "#EFEEF3",
