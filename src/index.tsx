@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { PrivacyPolicy } from './components/PrivacyPolicy'
 import theme from './theme';
 import { ThemeProvider } from '@material-ui/styles';
 import * as serviceWorker from './serviceWorker';
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import config from "./auth_config.json";
 import DateFnsUtils from '@date-io/date-fns';
+import { TermsOfService } from './components/TermsOfService'
 import { Auth0Provider } from "./react-auth0-wrapper";
 
 const onRedirectCallback = (appState: any) => {
@@ -31,7 +33,9 @@ ReactDOM.render(
   >
     <ThemeProvider theme={theme}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <App />
+        {window.location.pathname === "/privacy_policy" ? <PrivacyPolicy /> :
+          window.location.pathname === "/terms" ? <TermsOfService /> :
+            <App />}
       </MuiPickersUtilsProvider>
     </ThemeProvider>
   </Auth0Provider>,
