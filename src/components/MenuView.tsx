@@ -22,7 +22,7 @@ export default function SimpleMenu() {
 
     return (
         <div style={{}}> >
-            <button style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }} onClick={handleClick}
+            <button style={{ backgroundColor: "#091630", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }} onClick={handleClick}
             >
                 <ExpandMoreIcon color="secondary" />
                 <p className="top-card-subtitle" > Connect with Oura Account</p>
