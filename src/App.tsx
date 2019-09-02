@@ -99,6 +99,7 @@ const App: React.FC = () => {
     }
     if (isAuthenticated) {
       getToken();
+
     }
   }, [isAuthenticated, getTokenSilently]);
 
