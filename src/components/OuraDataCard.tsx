@@ -47,7 +47,7 @@ export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
     <>
 
       <div className="textContainer">
-        <img alt="" style={{ borderRadius: "50%", width: "50px", height: "50px" }} src={uro.img} />
+        <img alt="" style={{ borderRadius: "50%", width: "10vw", height: "10vw" }} src={uro.img} />
       </div>
       {Days.map((day, index) =>
         <DailyValueAndAvg urom={uro} index={index} />
@@ -57,7 +57,7 @@ export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
   const DayColumn = () =>
     <>
       <div className="textContainer">
-        <div style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+        <div style={{ width: "10vw", height: "10vw", borderRadius: "50%" }} />
       </div>
       {Days.map(day =>
         <div className="textContainer">
