@@ -20,7 +20,7 @@ text-align: center;
 
 .textContainer{
     height:8vh;
-    min-width:60px;
+    min-width:10vw;
     align-content: center;
     align-items: center;
     justify-content: center;
@@ -61,8 +61,7 @@ border-right:0px solid rgba(255,255,255,0.15);
 
 .uroCardTop{
     background-color: #535c6E;
-    padding:8px;
-    margin:8px;
+    padding:1vw;
     margin-bottom: 0px;
     border-radius: 8px 8px 0 0
 }
@@ -91,24 +90,29 @@ font-size: 20px;
 
 .uroCardBottom{
     background-color: #374053;
-    padding:8px;
+    padding:1vw;
     padding-top:0px;
     padding-bottom:0px;
-    margin:8px;
     margin-top: 0px;
     border-radius: 0pt 0pt 8px 8px
+}
+
+
+
+.root {
+    margin:1vw;
+    flex-grow: 1
 }
 
 .top-card {
     background-color: #900736;
     border-radius: 8px;
-    margin: 8px;
-    padding:8px;
-    padding-Left:25px;
-    padding-right:25px;
+    padding:1vw;
+    padding-Left:3vw;
+    padding-right:3vw;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 2vw;
   }
   
 
