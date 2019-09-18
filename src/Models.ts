@@ -89,6 +89,6 @@ export interface Uromaker {
 
 export interface Uromaker2 {
   img: string;
-  readiness_Score: number[];
+  readiness_Score: any[];
   token: string;
 }

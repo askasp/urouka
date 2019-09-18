@@ -1,7 +1,6 @@
 import { Uromaker2 } from "./Models";
 
 export async function GetUserData(token: string) {
-  console.log("token is", token);
   const response = await fetch("https://api.ouraring.com/v1/userinfo", {
     headers: {
       Authorization: `Bearer ${token}`
@@ -10,7 +9,6 @@ export async function GetUserData(token: string) {
   });
 
   const b = await response.json();
-  console.log(b);
 }
 
 const getToday = () => {
@@ -28,7 +26,6 @@ function getPreviousSunday() {
     day = 7;
   }
   var prevSunday;
-  console.log("day is", date.getDay());
   prevSunday = new Date().setDate(date.getDate() - day);
   date = new Date(prevSunday);
   return (
@@ -36,11 +33,24 @@ function getPreviousSunday() {
   );
 }
 
+function getDateForWeekDay(x: number) {
+  // Score is determine by the previous day.. so sunday to thursday, but do not include non existing days
+  var date = new Date();
+  var day = date.getDay();
+  if (day === 0) {
+    day = 7;
+  }
+  var prevSunday;
+  prevSunday = new Date().setDate(date.getDate() - day + x);
+  date = new Date(prevSunday);
+  return date.toISOString();
+  return (
+    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+  );
+}
 export async function GetOuraData(token: string, dataType: string) {
   const today = getToday();
   const prevSunday = getPreviousSunday();
-  console.log("Previous Sunday", prevSunday);
-  console.log("today is", today);
   const response = await fetch(
     "https://api.ouraring.com/v1/" +
       dataType +
@@ -56,11 +66,21 @@ export async function GetOuraData(token: string, dataType: string) {
     }
   );
   const b = await response.json();
-  console.log("received data is", b);
+  let tmp = [undefined, undefined, undefined, undefined, undefined];
   if (b["readiness"] !== undefined && b["readiness"].length > 0) {
     const c = b["readiness"].map((item: any) => item.score);
-    console.log("Oura return is", c);
-    return c;
+    for (var counter: number = 0; counter < 5; counter++) {
+      const result = b["readiness"].find(
+        (item: any) =>
+          item["summary_date"] === getDateForWeekDay(counter).split("T")[0]
+      );
+
+      if (result) {
+        tmp[counter] = result.score;
+      }
+    }
+
+    return tmp;
   }
   return [0];
 }
@@ -101,6 +121,5 @@ export async function GetAuth0UserData(token: string, userid: string) {
     }
   );
   const b = await response.json();
-  console.log(b);
   return b;
 }

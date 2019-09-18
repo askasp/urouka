@@ -33,13 +33,13 @@ const useStyles = makeStyles<Theme, {}, classNames>(theme => ({
 
 const App: React.FC = () => {
   const [token, setToken] = useState("");
-  const [haveFetched, setHaveFetched] = useState(false)
+  const [haveFetched, setHaveFetched] = useState(false);
   const {
     isAuthenticated,
     loading,
     getTokenSilently,
     user,
-    loginWithRedirect,
+    loginWithRedirect
   } = useAuth0();
 
   const [uromakers2, setUromakers2] = useState([
@@ -72,12 +72,11 @@ const App: React.FC = () => {
     const newuro = uromakers2.map(uromaker => {
       if (uromaker.img === state) {
         uromaker.token = token;
-        console.log("new item is", uromaker)
       }
       return uromaker;
     });
 
-    return newuro
+    return newuro;
   }
 
   async function fetchAndUpdateUromakers(uromakers: Uromaker2[]) {
@@ -89,7 +88,6 @@ const App: React.FC = () => {
     const newUro = await Promise.all(promises);
     setUromakers2(newUro);
     const a = await UpdateUserData(newUro, token, user.sub);
-    console.log("new updated is ", a)
   }
 
   useEffect(() => {
@@ -108,30 +106,26 @@ const App: React.FC = () => {
       if (haveFetched === false) {
         if (tmp["user_metadata"] === undefined) {
           await UpdateUserData(uromakers2, token, user.sub);
-          setHaveFetched(true)
-        }
-        else {
-          await fetchAndUpdateUromakers(tmp["user_metadata"]["uromakers2"])
-          setHaveFetched(true)
+          setHaveFetched(true);
+        } else {
+          await fetchAndUpdateUromakers(tmp["user_metadata"]["uromakers2"]);
+          setHaveFetched(true);
         }
       }
     }
     async function handleNewOuraToken() {
-      let newUro = setOuraToken()
-      console.log("uro fafter ser oura token", newUro)
-      const a = await fetchAndUpdateUromakers(newUro)
-      return a
+      let newUro = setOuraToken();
+      const a = await fetchAndUpdateUromakers(newUro);
+      return a;
     }
 
     if (user) {
       getUromakers();
       if (window.location.href.includes("access_token=") && haveFetched) {
-        handleNewOuraToken()
+        handleNewOuraToken();
       }
-
     }
   }, [token, haveFetched]);
-
 
   const classes = useStyles();
   return (
@@ -139,14 +133,14 @@ const App: React.FC = () => {
       {!isAuthenticated && !loading ? (
         <AuthLoginView loginWithRedirect={loginWithRedirect} />
       ) : (
-          <>
-            <div className={classes.titleImageDiv}>
-              <img alt="" className={classes.titleImage} src="./URO_logo.svg" />
-            </div>
-            {user && console.log({ user })}
-            <OuraDataCard2 uromakers={uromakers2} />
-          </>
-        )}
+        <>
+          <div className={classes.titleImageDiv}>
+            <img alt="" className={classes.titleImage} src="./URO_logo.svg" />
+          </div>
+          {user && console.log({ user })}
+          <OuraDataCard2 uromakers={uromakers2} />
+        </>
+      )}
     </div>
   );
 };

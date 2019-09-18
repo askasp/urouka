@@ -5,14 +5,16 @@ import SimpleMenu from "./MenuView";
 const Days = ["M", "T", "O", "T", "F"];
 
 export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
-  let individualavg = uromakers.map(uromaker =>
-    Math.round(
-      uromaker.readiness_Score.reduce(
-        (previous, current) => current + previous,
-        0
-      ) / uromaker.readiness_Score.length
-    )
-  );
+  let individualavg = uromakers.map(uromaker => {
+    const filtered = uromaker.readiness_Score.filter(
+      score => score !== undefined
+    );
+    const noe = Math.round(
+      filtered.reduce((previous, current) => current + previous, 0) /
+        filtered.length
+    );
+    return noe;
+  });
 
   const totalAvg =
     individualavg.reduce((previous, current) => current + previous, 0) /
@@ -23,10 +25,11 @@ export function OuraDataCard2({ uromakers }: { uromakers: Uromaker2[] }) {
 
   let reqAvg = 0;
 
+  let today = new Date();
+  const daynumber = today.getDay();
   if (uromakers !== undefined && uromakers[0] !== undefined) {
     reqAvg = Math.round(
-      (Goal * DaysInWeek - totalAvg * uromakers[0].readiness_Score.length) /
-        (DaysInWeek - uromakers[0].readiness_Score.length)
+      (Goal * DaysInWeek - totalAvg * daynumber) / (DaysInWeek - daynumber)
     );
   }
 
